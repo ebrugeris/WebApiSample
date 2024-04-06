@@ -45,6 +45,7 @@ namespace WebApiSample.Controllers
 
             return Ok();
         }
+
         [HttpPut("{id}")]
         public IActionResult UpdateStudent(int id, UpdateStudentRequestDto model)
         {

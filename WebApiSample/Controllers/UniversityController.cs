@@ -49,7 +49,6 @@ namespace WebApiSample.Controllers
             {
                 return NotFound();
             }
-
             university.Name = model.Name;
             university.City = model.City;
 
