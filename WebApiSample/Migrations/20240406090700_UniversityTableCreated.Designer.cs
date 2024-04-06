@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiSample.Models.ORM;
 
@@ -11,9 +12,11 @@ using WebApiSample.Models.ORM;
 namespace WebApiSample.Migrations
 {
     [DbContext(typeof(AcademyIstanbulContext))]
-    partial class AcademyIstanbulContextModelSnapshot : ModelSnapshot
+    [Migration("20240406090700_UniversityTableCreated")]
+    partial class UniversityTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,12 +60,7 @@ namespace WebApiSample.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UniversityId")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("UniversityId");
 
                     b.ToTable("Students");
                 });
@@ -92,15 +90,6 @@ namespace WebApiSample.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Universities");
-                });
-
-            modelBuilder.Entity("WebApiSample.Models.ORM.Student", b =>
-                {
-                    b.HasOne("WebApiSample.Models.ORM.University", "University")
-                        .WithMany()
-                        .HasForeignKey("UniversityId");
-
-                    b.Navigation("University");
                 });
 #pragma warning restore 612, 618
         }

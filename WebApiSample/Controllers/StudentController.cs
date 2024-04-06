@@ -15,6 +15,21 @@ namespace WebApiSample.Controllers
             context = new AcademyIstanbulContext();
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<GetAllStudentsResponseDto> model = context.Students.Select(x => new GetAllStudentsResponseDto()
+            {
+                ID = x.ID,
+                Name = x.Name,
+                Surname = x.Surname,
+                Email = x.Email,
+                UniversityName = x.University.Name
+            }).ToList();
+
+            return Ok(model);
+        }
+
         [HttpPost]
         public IActionResult AddStudent(CreateStudentRequestDto requestModel)
         {
@@ -41,11 +56,26 @@ namespace WebApiSample.Controllers
             }
 
             student.Name = model.Name;
-            student.Surname= model.Surname;
+            student.Surname = model.Surname;
             student.Email = model.Email;
             student.Phone = model.Phone;
             student.BirthDate = model.BirthDate;
 
+            context.SaveChanges();
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteStudent(int id)
+        {
+            Student student = context.Students.FirstOrDefault(y => y.ID == id);
+
+            if (student == null)
+            {
+                return NotFound();
+            }
+
+            student.IsDeleted = true;
             context.SaveChanges();
             return Ok();
         }

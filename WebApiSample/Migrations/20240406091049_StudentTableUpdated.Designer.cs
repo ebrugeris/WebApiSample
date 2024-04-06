@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApiSample.Models.ORM;
 
@@ -11,9 +12,11 @@ using WebApiSample.Models.ORM;
 namespace WebApiSample.Migrations
 {
     [DbContext(typeof(AcademyIstanbulContext))]
-    partial class AcademyIstanbulContextModelSnapshot : ModelSnapshot
+    [Migration("20240406091049_StudentTableUpdated")]
+    partial class StudentTableUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
